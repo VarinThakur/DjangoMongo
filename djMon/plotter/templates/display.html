@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %} Showing different Charts {% endblock %}
+
+{% block content %}
+
+<!-- {{points_doc_list}} -->
+<div style = "height: 300px; width: 500px;">
+  <canvas id="myChart" ></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [{% for data in points_doc_list %} "{{data.X}}", {% endfor %}],
+      datasets: [{
+        label: 'Bar Graph Label (X vs Y)',
+        data: [{% for data in points_doc_list %} "{{data.Y}}", {% endfor %}],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+<div style = "height: 300px; width: 500px;">
+  <canvas id="myChart2" ></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx2 = document.getElementById('myChart2');
+
+  var dataPoints = [{% for data in points_doc_list %} {x: {{data.X}}, y:{{data.Y}}},{% endfor %}] ;
+
+  dataPoints.sort((a, b) => a.x - b.x);
+
+  new Chart(ctx2, {
+    type: 'scatter',
+   data: {
+      datasets: [{
+         label: "Line Chart Label (X vs Y)",
+         showLine : true,
+         data: dataPoints,
+   }]},
+   options: {
+      responsive: true,
+   }
+  });
+</script>
+
+{% endblock %}
+

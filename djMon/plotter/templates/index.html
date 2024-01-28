@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} Adding a Point {% endblock %}
+
+{% block content %}
+    <div class="row-mt-3 pt-3">
+        <div class="col-md-4">
+            <div class="border p-3 shadow">
+                <h4>Add a Data Point</h4>
+                <hr>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="inputX" class="form-label">X Value :</label>
+                        <input type="number" class="form-control" id="input_x" aria-describedby="xHelp" name="X">
+                        <div id="xHelp" class="form-text">Please enter the X value.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputY" class="form-label">Y Value :</label>
+                        <input type="number" class="form-control" id="input_y" aria-describedby="yHelp" name="Y">
+                        <div id="yHelp" class="form-text">Please enter the Y value.</div>
+                    </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- <h1>Adding a point</h1>
+    <p>Point added.</p> -->
+{% endblock %}
